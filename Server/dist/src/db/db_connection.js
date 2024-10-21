@@ -8,11 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rundb = exports.connectToDb = exports.sequelize = void 0;
 const core_1 = require("@sequelize/core");
 const mysql_1 = require("@sequelize/mysql");
-const usermodel_1 = require("../model/usermodel");
+const usermodel_1 = __importDefault(require("../model/usermodel"));
 const sequelize = new core_1.Sequelize({
     dialect: mysql_1.MySqlDialect,
     database: "snablelkhir",
@@ -34,7 +37,7 @@ const connectToDb = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.connectToDb = connectToDb;
 const rundb = () => __awaiter(void 0, void 0, void 0, function* () {
-    usermodel_1.User.initModel(sequelize);
+    usermodel_1.default.initModel(sequelize);
     try {
         yield sequelize.sync({ force: false });
         console.log("Database & users table created/updated!");
