@@ -7,31 +7,41 @@ import SocialMediaIcons from "../components/SocialMediaIcons";
 import { IonRouterLink } from "@ionic/react";
 import { emailIcon, passwordIcon } from "../Icons/icons";
 import { useState, useEffect } from "react";
+
+import axios from "axios";
+
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
 
-  const handleSignup = () => {
-    // Check if any fields are null or empty
-    if (!email || !password || !confirmPassword) {
-      console.log("Please fill in all fields.");
-      return; // Exit the function early if any field is empty
+  const handleSignup = async () => {
+    // if (!email || !password || !confirmPassword) {
+    //   console.log("Please fill in all fields.");
+    //   return;
+    // }
+
+    // if (password !== confirmPassword) {
+    //   console.log("Passwords do not match.");
+    //   return;
+    // }
+
+    try {
+      // API call to the backend to create the user
+      const response = await axios.post("http://localhost:4000/createaccount", {
+        email: email,
+        password: password,
+      });
+
+      if (response.status === 200) {
+        console.log("User created successfully:", response.data);
+        // You can redirect the user to another page (e.g., login) or display a success message
+      }
+    } catch (error) {
+      console.error("Error signing up:");
     }
-
-    // Check if passwords match
-    if (password !== confirmPassword) {
-      console.log("Passwords do not match.");
-      return; // Exit if passwords do not match
-    }
-
-    // Proceed with signup logic
-    console.log("Signup clicked");
-    console.log("Email:", email);
-    console.log("Password:", password);
-
-    // Add your signup logic here (e.g., API call)
   };
+
   const handleEmailOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     console.log("Changed Email:", e.target.value);
