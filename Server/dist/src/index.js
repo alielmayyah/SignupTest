@@ -40,8 +40,15 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const db_connection_1 = require("./db/db_connection");
+const user_route = require("../src/routes/user_routes");
 const app = (0, express_1.default)();
+<<<<<<< HEAD
 const PORT = 4000;
+=======
+const PORT = process.env.PORT || 3000;
+app.use(express_1.default.json());
+app.use(user_route);
+>>>>>>> b993c392d3af055d07ec3aeaf037d32289d98384
 app.get("/", (req, res) => {
   res.send("Hello, TypeScript with Nodemon!");
 });
