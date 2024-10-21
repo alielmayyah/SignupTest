@@ -3,7 +3,7 @@ import { sequelize, connectToDb, rundb } from "./db/db_connection";
 import User from "./model/usermodel"; // Import the User model
 const user_route = require("../src/routes/user_routes");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(user_route);
 app.get("/", (req, res) => {
