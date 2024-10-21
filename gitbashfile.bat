@@ -5,10 +5,10 @@ setlocal enabledelayedexpansion
 git pull origin main
 
 :: Add server directory
-git add server
+git add Server
 
 :: Add client directory
-git add client
+git add Client
 
 :: Check if commit_number.txt exists, if not, create it and initialize with 0
 if not exist commit_number.txt echo 0 > commit_number.txt
